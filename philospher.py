@@ -1,4 +1,4 @@
-#!/home/amarriner/.virtualenvs/philosopher/bin/python
+#!/usr/bin/env python
 
 """Script to parse quotes from wikiquotes and do silly things to them"""
 from bs4 import BeautifulSoup
