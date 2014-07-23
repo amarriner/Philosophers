@@ -94,7 +94,9 @@ def process_quote(q):
    # tagger to work correctly yet so this will have to suffice for now. Unigram taggers generally take the highest
    # probability part of speech for a given token. As opposed to a bigram (or even trigram) tagger which takes 
    # surrounding words and context into account
-   for (word, tag) in unigram.tagger.tag(tokens):
+   tags = ''
+   tagged = unigram.tagger.tag(tokens)
+   for (word, tag) in tagged:
       if tag == None:
          tag = 'None'
 
@@ -104,6 +106,11 @@ def process_quote(q):
          quote = quote + ' ~' + random.choice(WORDS[tag])['word'] + '~'
       else:
          quote = quote + ' ' + word
+
+      tags = tags + ' ' + word + ' (' + tag + ')'
+
+   print 'TAGGED: ' + tags
+   print '-------------------------------------------------------------------------------------------------------'
 
    return quote
 
@@ -118,7 +125,8 @@ def main():
    quote = get_quote()
 
    # Transform the quote
-   print process_quote(quote)
+   print 'QUOTE: ' + process_quote(quote)
+   print '-------------------------------------------------------------------------------------------------------'
 
 
 if __name__ == '__main__':
