@@ -3,6 +3,7 @@
 """Script to parse quotes from wikiquotes and do silly things to them"""
 from bs4 import BeautifulSoup
 
+import nltk
 import os
 import requests
 import sys
@@ -12,7 +13,7 @@ BASE_URL = 'http://en.wikiquote.org/wiki/Locke'
 
 """Sets up a unigram tagger via the NLTK library"""
 import tagger as T
-tagger = T.Tagger('uni')
+unigram = T.Tagger('uni')
 
 def main():
    """Main entry point"""
@@ -25,7 +26,9 @@ def main():
 
       if sib.name == 'ul':
          sib.ul.extract()
-#         print sib.text
+         tokens = nltk.word_tokenize(sib.text)
+         print '-----------------------------------------------------------------------------------------------'
+         print unigram.tagger.tag(tokens)
 
 if __name__ == '__main__':
    sys.exit(main())
